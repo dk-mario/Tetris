@@ -26,6 +26,37 @@ public class DrawGame extends JLabel {
             }
         }
 
+        for (int i = 0; i < Game.map.length; i++) {
+            for (int j = 0; j < Game.map[i].length; j++) {
+                if (Game.map[i][j] > 0) {
+                    switch (Game.map[i][j]) {
+                        case 1:
+                            graphics.setColor(Color.CYAN);
+                            break;
+                        case 2:
+                            graphics.setColor(Color.YELLOW);
+                            break;
+                        case 3:
+                            graphics.setColor(Color.MAGENTA);
+                            break;
+                        case 4:
+                            graphics.setColor(Color.ORANGE);
+                            break;
+                        case 5:
+                            graphics.setColor(Color.BLUE);
+                            break;
+                        case 6:
+                            graphics.setColor(Color.RED);
+                            break;
+                        case 7:
+                            graphics.setColor(Color.GREEN);
+                            break;
+                    }
+                    graphics.fillRect(Conversion.cellToCoordinates(i), Conversion.cellToCoordinates(j), 32, 32);
+                }
+            }
+        }
+
 //      graphics.setColor(new Color(100, 100, 100));
         graphics.setColor(Color.LIGHT_GRAY);
         for (int i = 0; i < 10; i++) {
