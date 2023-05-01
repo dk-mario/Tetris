@@ -16,29 +16,33 @@ public class GameLoop extends Thread {
         while (running) {
             try {
                 if (Game.gameState == GameState.inGame) {
-                    if(!Collision.collideWithWall(Game.current, 0) && !Collision.collideWithBlock(Game.current, 0)) {
-                        Game.current.setY(Game.current.getY() + 1);
-                        Collision.collideWithWall(Game.current, 0);
-                    }
 
-                    Game.current.setY(Game.current.getY() + 1);
+                    if (!Collision.collideWithWall(Game.currentBlock, 0)
+                            && !Collision.collideWithBlock(Game.currentBlock, 0)) {
+                        Game.currentBlock.setY(Game.currentBlock.getY() + 1);
+                        Collision.collideWithWall(Game.currentBlock, 0);
+
+                    }
 
                     if (Game.spawnNewBlock) {
+                        Collision.checkFullRow(1);
                         Game.blocks.add(Game.nextBlock);
-                        Game.current = Game.nextBlock;
+                        Game.currentBlock = Game.nextBlock;
                         Game.nextBlock = new Block();
                         Game.spawnNewBlock = false;
-
                     }
                 }
-
                 if (!Game.speedUp) {
                     sleep(1000);
-                } else
+                } else {
                     sleep(100);
+                }
+
             } catch (InterruptedException e) {
+
                 e.printStackTrace();
             }
         }
+
     }
 }

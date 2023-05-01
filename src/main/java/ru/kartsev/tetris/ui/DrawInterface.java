@@ -16,11 +16,12 @@ public class DrawInterface extends JLabel {
         super.paintComponent(graphics);
 
         graphics.setColor(Game.nextBlock.getColor());
-        for (int i = 0; i < Game.nextBlock.getBounds()[Game.nextBlock.getRotation()].length; i++) {
-            for (int j = 0; j < Game.nextBlock.getBounds()[Game.nextBlock.getRotation()][i].length; j++) {
-                if (Game.nextBlock.getBounds()[Game.nextBlock.getRotation()][i][j] == 1) {
-                    graphics.fillRect(Conversion.cellToCoordinates(1 + i),
-                            Conversion.cellToCoordinates(j), 32, 32);
+        for (int j = 0; j < Game.nextBlock.getBounds()[Game.nextBlock.getRotation()].length; j++) {
+            for (int k = 0; k < Game.nextBlock.getBounds()[Game.nextBlock.getRotation()][j].length; k++) {
+
+                if (Game.nextBlock.getBounds()[Game.nextBlock.getRotation()][j][k] == 1) {
+                    graphics.fillRect(Conversion.cellToCoordinates(1 + j),
+                            Conversion.cellToCoordinates(k), 32, 32);
                 }
             }
         }
@@ -35,8 +36,20 @@ public class DrawInterface extends JLabel {
         }
 
         // Черная оконтовка дополнительного игрового поля
+        graphics.setColor(Color.LIGHT_GRAY);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                graphics.drawRect(i * 32 + 32, j * 32, 32, 32);
+            }
+        }
+
         graphics.setColor(Color.BLACK);
         graphics.drawRect(32, 0, 128, 128);
+
+        graphics.setFont(Gui.pixelFont);
+        graphics.drawString("SCORE: " + Game.score, 32, 200);
+
+        graphics.drawString("HIGHSCORE: " + Game.highScore, 32, 250);
 
         repaint();
     }

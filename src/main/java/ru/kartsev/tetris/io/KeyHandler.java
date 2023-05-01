@@ -13,7 +13,6 @@ import java.awt.event.KeyListener;
 public class KeyHandler implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -28,37 +27,38 @@ public class KeyHandler implements KeyListener {
         if (Game.gameState == GameState.inGame) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 try {
-                    if (!Collision.collideInRotation(Game.current)) {
-                        Game.current.rotate();
+                    if (!Collision.collideInRotation(Game.currentBlock)) {
+                        Game.currentBlock.rotate();
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (Exception e1) {
+
+                    e1.printStackTrace();
                 }
             }
 
             if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                 Game.speedUp = true;
             }
+
             if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
                 try {
-                    if (!Collision.collideWithWall(Game.current, 1) &&
-                            !Collision.collideWithWall(Game.current, 1)) {
-                        Game.current.setX(Game.current.getX() + 1);
+                    if (!Collision.collideWithWall(Game.currentBlock, 1)
+                            && !Collision.collideWithBlock(Game.currentBlock, 1)) {
+                        Game.currentBlock.setX(Game.currentBlock.getX() + 1);
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
                 }
-            }
 
-
-            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                 try {
-                    if (!Collision.collideWithWall(Game.current, -1) &&
-                            !Collision.collideWithWall(Game.current, -1)) {
-                        Game.current.setX(Game.current.getX() - 1);
+                    if (!Collision.collideWithWall(Game.currentBlock, -1)
+                            && !Collision.collideWithBlock(Game.currentBlock, -1)) {
+                        Game.currentBlock.setX(Game.currentBlock.getX() - 1);
                     }
-                } catch(Exception ex){
-                    ex.printStackTrace();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
                 }
             }
             // Game on pause
@@ -88,4 +88,5 @@ public class KeyHandler implements KeyListener {
         }
 
     }
+
 }

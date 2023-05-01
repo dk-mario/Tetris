@@ -30,7 +30,6 @@ public class Block {
                 break;
             default:
                 size = 3;
-                break;
         }
 
         // выбор цвета для типа блока
@@ -65,7 +64,7 @@ public class Block {
         try {
             bounds = blockBuilder(blockType);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -77,11 +76,11 @@ public class Block {
     }
 
     // Функция для генерации блоков из текстового файла
-    public int[][][] blockBuilder(BlockType blockType) throws FileNotFoundException {
+    public int[][][] blockBuilder(BlockType type) throws FileNotFoundException {
+
         int[][][] bounds;
 
-
-        switch (blockType) {
+        switch (type) {
             case I:
                 bounds = new int[4][4][4];
                 break;
@@ -90,22 +89,20 @@ public class Block {
                 break;
             default:
                 bounds = new int[4][3][3];
-                break;
         }
 
         File file = new File("src\\main\\resources\\blocks\\" + blockType + ".txt");
         // Для чтения из файла
         Scanner scanner = new Scanner(file);
-
-        // 4 вращения 4 варианта блоков
         for (int variant = 0; variant < 4; variant++) {
             for (int i = 0; i < bounds[0].length; i++) {
+
                 if (scanner.hasNext()) {
                     String[] srow = scanner.next().split("");
                     int[] row = new int[bounds[0].length];
 
                     for (int j = 0; j < row.length; j++) {
-                        row[j] = Integer.parseInt(srow[j]);
+                        row[j] = Integer.valueOf(srow[j]);
                         bounds[variant][j][i] = row[j];
                     }
                 }

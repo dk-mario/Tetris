@@ -3,15 +3,13 @@ package ru.kartsev.tetris.data;
 import ru.kartsev.tetris.gamelogic.Block;
 import ru.kartsev.tetris.gamelogic.Game;
 import ru.kartsev.tetris.gamelogic.GameState;
+import ru.kartsev.tetris.io.DataHandler;
 
-import javax.activation.DataHandler;
 
 /**
  * @author Dmitry Kartsev
  */
-//import io.DataHandler;
 public class Collision {
-
     public static boolean collideWithBlock(Block b, int direction) {
         // Direction: -1 = Left, 0 = Down, 1 = Rights
 
@@ -124,7 +122,7 @@ public class Collision {
     }
 
     public static boolean collideWithWall(Block b, int direction) {
-        // Direction: -1 = Left, 0 = Down, 1 = Rights
+        // direction: -1 = links, 0 = runter, 1 = rechts
         switch (direction) {
             case -1:
                 for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
@@ -167,7 +165,6 @@ public class Collision {
         return false;
     }
 
-
     private static void fillBlock(Block b) {
         try {
             for (int i = 0; i < b.getBounds()[b.getRotation()].length; i++) {
@@ -184,7 +181,6 @@ public class Collision {
         }
         checkLoose();
     }
-
 
     public static void checkFullRow(int multiplier) {
 

@@ -2,7 +2,6 @@ package ru.kartsev.tetris.ui;
 
 import ru.kartsev.tetris.data.Conversion;
 import ru.kartsev.tetris.gamelogic.Game;
-import ru.kartsev.tetris.gamelogic.GameState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +15,14 @@ public class DrawGame extends JLabel {
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 
-        graphics.setColor(Game.current.getColor());
-        for (int i = 0; i < Game.current.getBounds()[Game.current.getRotation()].length; i++) {
-            for (int j = 0; j < Game.current.getBounds()[Game.current.getRotation()][i].length; j++) {
-                if (Game.current.getBounds()[Game.current.getRotation()][i][j] == 1) {
-                    graphics.fillRect(Conversion.cellToCoordinates(Game.current.getX() + i),
-                            Conversion.cellToCoordinates(Game.current.getY() + j), 32, 32);
+
+        graphics.setColor(Game.currentBlock.getColor());
+        for (int j = 0; j < Game.currentBlock.getBounds()[Game.currentBlock.getRotation()].length; j++) {
+            for (int k = 0; k < Game.currentBlock.getBounds()[Game.currentBlock.getRotation()][j].length; k++) {
+
+                if (Game.currentBlock.getBounds()[Game.currentBlock.getRotation()][j][k] == 1) {
+                    graphics.fillRect(Conversion.cellToCoordinates(Game.currentBlock.getX() + j),
+                            Conversion.cellToCoordinates(Game.currentBlock.getY() + k), 32, 32);
                 }
             }
         }
